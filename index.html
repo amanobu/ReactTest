@@ -12,23 +12,25 @@
   </body>
 </html>
 <script>
+ var contacts = [
+   {key: 1, name: "hoge", email: "hoge@hoge.com"},
+   {key: 2, name: "hage", email: "hage@hoge.com"}
+ ];
+
+ var listElements =
+ contacts.filter(function(contact){ return contact.email;})
+         .map(function(contact){
+           return React.createElement('li',{key: contact.key},
+                                      React.createElement('h2',{},contact.name),
+                                      React.createElement('a',{href: 'mailto:'+contact.email},contact.email))
+         });
  var rootElement =
  React.createElement('dev',{},
                      React.createElement('h1',{},"contacts"),
-                     React.createElement('ul',{},
-                                         React.createElement('li',{},
-                                                             React.createElement('h2',{},"hoge"),
-                                                             React.createElement('a',{href: 'mailto:hoge@hoge.com'},'hoge@hoge.com')
-                                         ),
-                                         React.createElement('li',{},
-                                                             React.createElement('h2',{},"hage"),
-                                                             React.createElement('a',{href: 'mailto:hage@hoge.com'},'hage@hoge.com')
-                                         )
-                     )
+                     React.createElement('ul',{},listElements)
  );
+   
  ReactDOM.render(rootElement,
                  document.getElementById('react-app'));
-   
-                                         
-                     
+ 
 </script>
