@@ -12,20 +12,37 @@
   </body>
 </html>
 <script>
+ var ContactItem = React.createClass({
+   propTypes: {
+     key: React.PropTypes.number.isRequired,
+     name: React.PropTypes.string.isRequired,
+     email: React.PropTypes.string,
+     description: React.PropTypes.string
+   },
+   render: function(){
+     return (
+       React.createElement('li', {className: 'Contact'},
+                           React.createElement('h2',{className: 'Contact-name'}, this.props.name),
+                           React.createElement('a',{href:'mailto:'+this.props.email, className: 'Contact-email'}, this.props.email),
+                           React.createElement('div',{className: 'Contact-description'}, this.props.description)
+       )
+     )
+   },
+ });
+
  var contacts = [
-   {key: 1, name: "hoge", email: "hoge@hoge.com"},
-   {key: 2, name: "hage", email: "hage@hoge.com"}
+   {key: 1, name: "James K Nelson", email: "james@jamesknelson.com", description: "Front-end Unicorn"},
+   {key: 2, name: "Jim", email: "jim@example.com"},
+   {key: 3, name: "Joe"},
  ];
 
  var listElements =
  contacts.filter(function(contact){ return contact.email;})
          .map(function(contact){
-           return React.createElement('li',{key: contact.key},
-                                      React.createElement('h2',{},contact.name),
-                                      React.createElement('a',{href: 'mailto:'+contact.email},contact.email))
+           return React.createElement(ContactItem,contact)
          });
  var rootElement =
- React.createElement('dev',{},
+ React.createElement('div',{},
                      React.createElement('h1',{},"contacts"),
                      React.createElement('ul',{},listElements)
  );
